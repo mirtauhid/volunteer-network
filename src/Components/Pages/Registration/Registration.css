@@ -1,0 +1,36 @@
+.reg-container{
+    background: #F8FAFC;
+    min-width: 100%;
+    min-height: 577px;
+    padding-top:30px;
+    text-align: center;
+}
+#main-logo{
+    height: 60px;
+    width: 202px;
+    margin-bottom: 25px;
+}
+.reg-box{
+    height: 420px;
+    width: 400px;
+    border: 2px solid #DFDFDF ;
+    padding: 25px 35px;
+    margin: 0 auto;
+    background: #FFFFFF;
+    border-radius: 0.25rem;
+    text-align: left;
+}
+.reg-form input{
+    width: 100%;
+    margin-bottom: 23px;
+    border: none;
+    border-bottom: 1px solid #C7C7C7;
+}
+.reg-form input::placeholder{
+    color: black;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+}
+.submit-btn{
+    margin-top: 5px;
+}

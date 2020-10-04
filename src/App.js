@@ -1,25 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { createContext, useState } from 'react';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import Home from './Components/Pages/Home/Home';
+import Login from './Components/Pages/Login/Login';
+import Registration from './Components/Pages/Registration/Registration';
+import EventTasks from './Components/Pages/EventTasks/EventTasks';
+import Admin from './Components/Pages/Admin/Admin';
+import NotMatch from './Components/Pages/NotMatch/NotMatch';
+
+
+export const UserContext = createContext();
+
 
 function App() {
+  const [loggedInUser, setLoggedInUser] = useState({});
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/login/:id">
+            <Login />
+          </Route>
+          <Route path="/registration/:id">
+            <Registration />
+          </Route>
+          <Route path="/eventTasks">
+            <EventTasks />
+          </Route>
+          <Route path="/admin">
+            <Admin />
+          </Route>
+          <Route path="*">
+            <NotMatch />
+          </Route>
+        </Switch>
+      </Router>
+    </UserContext.Provider>
   );
 }
 
