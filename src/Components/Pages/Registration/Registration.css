@@ -34,3 +34,6 @@
 .submit-btn{
     margin-top: 5px;
 }
+.MuiInputBase-input.MuiInput-input{
+    width: 325px;
+}

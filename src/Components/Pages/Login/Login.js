@@ -20,12 +20,8 @@ const Login = () => {
 
     // eslint-disable-next-line no-unused-vars
     const [user, setUser] = useState({
-        isLoggedIn: false,
         name: "",
-        email: "",
-        uid: "",
-        error: "",
-        success: ""
+        email: ""
     });
 
     if (!firebase.apps.length) {
@@ -36,14 +32,10 @@ const Login = () => {
         const provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth().signInWithPopup(provider)
             .then(res => {
-                const { displayName, email, uid } = res.user;
+                const { displayName, email } = res.user;
                 const newUser = {
-                    isLoggedIn: true,
                     name: displayName,
-                    email: email,
-                    uid: uid,
-                    error: false,
-                    success: true
+                    email: email
                 }
                 setUser(newUser);
                 setLoggedInUser(newUser);
@@ -51,16 +43,6 @@ const Login = () => {
             })
             .catch(err => {
                 console.log(err);
-                const newUser = {
-                    isLoggedIn: false,
-                    name: "",
-                    email: "",
-                    uid: "",
-                    error: true,
-                    success: false
-                }
-                setUser(newUser);
-                setLoggedInUser(newUser);
             });
     }
 
