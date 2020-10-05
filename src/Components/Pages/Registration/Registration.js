@@ -39,23 +39,28 @@ const Registration = () => {
     }, [])
 
     if (document.getElementById('reg-container') && document.getElementById('reg-form')) {
-        const fullName = document.getElementById('fullName');
-        fullName.value = loggedInUser.name;
-        const email = document.getElementById('email');
-        email.value = loggedInUser.email;
+        document.getElementById('fullName').value = loggedInUser.name;
+        if (document.getElementById('fullName').value == "undefined") {
+            document.getElementById('fullName').value = "";
+        }
+        document.getElementById('email').value = loggedInUser.email;
+        if (document.getElementById('email').value == "undefined") {
+            document.getElementById('email').value = "";
+        }
         document.getElementById('taskName').value = events.title;
     }
 
 
     const handleRegistration = () => {
-        const newRegi = { ...loggedInUser, ...selectedDate };
+        const newRegi = { ...loggedInUser, ...selectedDate, ...events };
         fetch('http://localhost:5000/addRegistration', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(newRegi)
         })
             .then(res => res.json())
-            .then(data => { console.log(data) });
+            .then(data => { 
+                console.log(data) });
     }
 
 
@@ -67,12 +72,13 @@ const Registration = () => {
                 <h3>Register as a Volunteer</h3>
                 <br />
                 <form className="reg-form" id="reg-form" onSubmit={handleRegistration}>
-                    <input type="text" placeholder="Full Name" id="fullName" />
+                    <input type="text" placeholder="Full Name" id="fullName"  required/>
                     <br />
-                    <input type="text" placeholder="Username or Email" id="email" />
+                    <input type="text" placeholder="Username or Email" id="email" required />
                     <br />
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils} >
                         <DatePicker
+                            id="datePicker"
                             disableToolbar
                             InputProps={{
                                 disableUnderline: true,
@@ -88,9 +94,9 @@ const Registration = () => {
                         />
                     </MuiPickersUtilsProvider>
                     <br />
-                    <input type="text" placeholder="Description" />
+                    <input type="text" placeholder="Description" id="description" required/>
                     <br />
-                    <input type="text" placeholder="Organize books at the library." id="taskName" />
+                    <input type="text" placeholder="Organize books at the library." id="taskName" required />
                     <br />
                     <input type="submit" value="Registration" className="btn btn-primary submit-btn" />
                 </form>
