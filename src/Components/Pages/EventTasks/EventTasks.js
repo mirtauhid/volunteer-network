@@ -11,7 +11,7 @@ const EventTasks = () => {
 
 
     useEffect(() => {
-        fetch('http://localhost:5000/registrations?email=' + loggedInUser.email, {
+        fetch('https://localhost:5000/registrations?email=' + loggedInUser.email, {
             method: 'GET'
         })
             .then(res => res.json())

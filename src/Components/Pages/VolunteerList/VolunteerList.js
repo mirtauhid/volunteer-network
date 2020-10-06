@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const VolunteerList = () => {
     const [registrations, setRegistrations] = useState([]);
-    const url = "http://localhost:5000/registrations";
+    const url = "https://localhost:5000/registrations";
     useEffect(() => {
         fetch(url)
             .then(res => res.json())
