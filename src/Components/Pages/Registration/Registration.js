@@ -3,10 +3,12 @@ import { Container } from 'react-bootstrap';
 import './Registration.css';
 import Logo from '../../../logos/Group 1329.png';
 import { UserContext } from '../../../App';
-import { useParams } from 'react-router-dom';
-import { DatePicker, KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
-import { Grid } from '@material-ui/core';
+import { useHistory, useParams } from 'react-router-dom';
+import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+
+
+
 
 
 const Registration = () => {
@@ -16,6 +18,7 @@ const Registration = () => {
     const [selectedDate, setSelectedDate] = useState({
         date: new Date()
     });
+    const history = useHistory();
 
 
     const handleEventDate = (date) => {
@@ -51,17 +54,28 @@ const Registration = () => {
     }
 
 
-    const handleRegistration = () => {
+    const handleRegistration = (e) => {
+
         const newRegi = { ...loggedInUser, ...selectedDate, ...events };
         fetch('http://localhost:5000/addRegistration', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(newRegi)
+
         })
             .then(res => res.json())
-            .then(data => { 
-                console.log(data) });
+            .then(data => {
+                console.log(data)
+                if (data) {
+                    history.push('/eventTasks');
+                }
+            });
+
+        e.preventDefault();
     }
+
+
+
 
 
 
@@ -72,7 +86,7 @@ const Registration = () => {
                 <h3>Register as a Volunteer</h3>
                 <br />
                 <form className="reg-form" id="reg-form" onSubmit={handleRegistration}>
-                    <input type="text" placeholder="Full Name" id="fullName"  required/>
+                    <input type="text" placeholder="Full Name" id="fullName" required />
                     <br />
                     <input type="text" placeholder="Username or Email" id="email" required />
                     <br />
@@ -94,7 +108,7 @@ const Registration = () => {
                         />
                     </MuiPickersUtilsProvider>
                     <br />
-                    <input type="text" placeholder="Description" id="description" required/>
+                    <input type="text" placeholder="Description" id="description" required />
                     <br />
                     <input type="text" placeholder="Organize books at the library." id="taskName" required />
                     <br />
