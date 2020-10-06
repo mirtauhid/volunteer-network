@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const VolunteerList = () => {
     const [registrations, setRegistrations] = useState([]);
-    const url = "https://localhost:5000/registrations";
+    const url = "https://afternoon-gorge-45045.herokuapp.com/registrations";
     useEffect(() => {
         fetch(url)
             .then(res => res.json())
@@ -15,7 +15,7 @@ const VolunteerList = () => {
     function deleteEvent(id) {
         console.log('delete');
 
-        fetch(`http://localhost:5000/registrations/delete/${id}`, {
+        fetch(`https://afternoon-gorge-45045.herokuapp.com/registrations/delete/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

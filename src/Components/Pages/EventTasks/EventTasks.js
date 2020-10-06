@@ -11,7 +11,7 @@ const EventTasks = () => {
 
 
     useEffect(() => {
-        fetch('https://localhost:5000/registrations?email=' + loggedInUser.email, {
+        fetch('https://afternoon-gorge-45045.herokuapp.com/registrations?email=' + loggedInUser.email, {
             method: 'GET'
         })
             .then(res => res.json())
@@ -22,7 +22,7 @@ const EventTasks = () => {
     }, [selfEvents])
 
     const deleteEvent = (id) => {
-        fetch(`http://localhost:5000/registrations/delete/${id}`, {
+        fetch(`https://afternoon-gorge-45045.herokuapp.com/registrations/delete/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

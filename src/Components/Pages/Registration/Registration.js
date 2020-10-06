@@ -57,7 +57,7 @@ const Registration = () => {
     const handleRegistration = (e) => {
 
         const newRegi = { ...loggedInUser, ...selectedDate, ...events };
-        fetch('http://localhost:5000/addRegistration', {
+        fetch('https://afternoon-gorge-45045.herokuapp.com/addRegistration', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(newRegi)
